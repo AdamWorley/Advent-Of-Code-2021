@@ -17,23 +17,22 @@ fn main() {
         .map(|line| parse_instruction(&line.unwrap()))
         .collect();
 
-    let horizontal_distance = instructions
-        .iter()
-        .filter(|i| matches!(i.direction, Direction::Forward))
-        .fold(0, |acc, x| acc + x.distance);
+    let mut horizontal_distance = 0;
+    let mut aim = 0;
+    let mut depth = 0;
 
-    let vertical_distance = instructions
-        .iter()
-        .filter(|i| matches!(i.direction, Direction::Up | Direction::Down))
-        .fold(0, |acc, x| {
-            if matches!(x.direction, Direction::Down) {
-                acc + x.distance
-            } else {
-                acc - x.distance
+    instructions.iter().for_each(|x| {
+        match x.direction {
+            Direction::Down => aim += x.distance,
+            Direction::Up => aim -= x.distance,
+            Direction::Forward => {
+                horizontal_distance += x.distance;
+                depth += aim * x.distance;
             }
-        });
+        }
+    });
 
-    println!("{} distance", horizontal_distance * vertical_distance);
+    println!("{} distance", horizontal_distance * depth);
 }
 
 fn parse_instruction(s: &str) -> Instruction {
