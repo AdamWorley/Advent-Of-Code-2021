@@ -42,8 +42,8 @@ fn parse_instruction(s: &str) -> Instruction {
     let distance = tmp[1].parse::<i32>().unwrap();
 
     return Instruction {
-        direction: parse_direction(&direction).unwrap(),
-        distance: distance,
+        direction: parse_direction(direction).unwrap(),
+        distance,
     };
 }
 
