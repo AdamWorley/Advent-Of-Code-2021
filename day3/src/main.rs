@@ -23,11 +23,11 @@ fn main() {
                 .map(|v| v.chars().nth(n).unwrap())
                 .collect::<String>();
 
-            return if number_of_ones(&tmp) > number_of_zeros(&tmp) {
+            if number_of_ones(&tmp) > number_of_zeros(&tmp) {
                 '1'
             } else {
                 '0'
-            };
+            }
         })
         .collect();
 
@@ -40,11 +40,11 @@ fn main() {
                 .map(|v| v.chars().nth(n).unwrap())
                 .collect::<String>();
 
-            return if number_of_ones(&tmp) < number_of_zeros(&tmp) {
+            if number_of_ones(&tmp) < number_of_zeros(&tmp) {
                 '1'
             } else {
                 '0'
-            };
+            }
         })
         .collect();
 
@@ -60,11 +60,11 @@ fn main() {
     println!("{}", oxygen * co2);
 }
 
-fn number_of_ones(s: &String) -> usize {
+fn number_of_ones(s: &str) -> usize {
     return s.chars().filter(|x| x == &'1').count();
 }
 
-fn number_of_zeros(s: &String) -> usize {
+fn number_of_zeros(s: &str) -> usize {
     return s.chars().filter(|x| x == &'0').count();
 }
 
@@ -93,13 +93,13 @@ fn least_common(readings: &Vec<String>, position: usize, default: char) -> char 
         })
         .collect::<String>();
 
-    return if number_of_ones(&chars_at_pos) == number_of_zeros(&chars_at_pos) {
+    if number_of_ones(&chars_at_pos) == number_of_zeros(&chars_at_pos) {
         return default;
     } else if number_of_ones(&chars_at_pos) < number_of_zeros(&chars_at_pos) {
         '1'
     } else {
         '0'
-    };
+    }
 }
 
 fn filter_by_common(readings: &Vec<String>, position: usize, default: char) -> Vec<String> {
